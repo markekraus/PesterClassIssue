@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "command": "powershell",
+    "isShellCommand": true,
+    "args": ["-NoProfile", "-NoLogo", "-ExecutionPolicy", "Bypass"],
+    "showOutput": "always",
+    "suppressTaskName": true,
+
+    "tasks": [
+        {
+            "taskName": "Test",
+            "isTestCommand": true,
+            "args": ["-NonInteractive","-Command","Invoke-Pester -Script '${workspaceRoot}\\Tests\\'"],
+            "problemMatcher": {
+                "owner": "pester",
+                "pattern": {
+                    "regexp": "(.*);(.*);(.*)",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        },
+        {
+            "taskName": "ThisTest",
+            "args": ["-NonInteractive","-Command","Invoke-Pester -Script '${file}'"]
+        }
+    ]
+}
